@@ -1,6 +1,8 @@
 from conans import ConanFile, CMake, tools
 from fobis.fobis import run_fobis
 
+import os
+
 class FobisExampleConan(ConanFile):
     name = "FoBiS Example"
     version = "2.2.8"
@@ -10,10 +12,13 @@ class FobisExampleConan(ConanFile):
 
     def source(self):
         self.run("git clone https://github.com/szaghi/FoBiS.git")
-        self.run("cd FoBiS/examples/library")
+        #self.run("cd FoBiS/examples/library")
 
     def build(self):
-        run_fobis(["build", "-f", "fobis.shared"])
+        # 
+        os.chdir('FoBiS/examples/library')
+        print('Change directory to %s:' %(os.cwd()) )
+        #run_fobis(["build", "-f", "fobis.shared"])
         
         # Explicit way:
         # self.run('cmake %s/hello %s' % (self.source_folder, cmake.command_line))
